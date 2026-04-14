@@ -1,0 +1,12 @@
+for taking out all the human readable strings from the file i have used the
+this command:
+-strings target_dhakadvinay | grep -C 10 "passed"
+
+this will filter the strings based on the keyword passed 
+
+by this i will get the password so after this i have just created payload and doen 
+
+echo "zdJmcHziOOZoMmlpBgh6JvonctWmPY7WZNJdbfINc14=" > payload.txt
+
+and after that i for checking my pasword is correct i have done 
+./target_dhakadvinay < payload.txt

@@ -1,0 +1,40 @@
+Using String Concatenation
+
+You can build the filename like this:
+
+char libname[32];
+
+strcpy(libname, "./lib");
+strcat(libname, op_name);
+strcat(libname, ".so");
+🔸 How It Works
+strcpy(libname, "./lib");
+Copies "./lib" into libname.
+
+strcat(libname, op_name);
+Appends the operation name (e.g., "add"), resulting in:
+
+./libadd
+
+strcat(libname, ".so");
+Appends the suffix:
+
+./libadd.so
+🔸 Example
+
+If op_name = "add", the final value becomes:
+
+./libadd.so
+🔹 Why snprintf() Is Preferred
+
+Although concatenation works, snprintf() is safer and more efficient:
+
+snprintf(libname, sizeof(libname), "./lib%s.so", op_name);
+✅ Advantages of snprintf()
+Feature	snprintf()	strcpy() + strcat()
+Prevents buffer overflow	✅ Yes	❌ No
+Null-terminates safely	✅ Yes	⚠️ Not guaranteed if overflow occurs
+Requires fewer function calls	✅ One	❌ Three
+More readable	✅ Yes	⚠️ Moderate
+Returns required length	✅ Yes	❌ No
+Recommended in secure coding	✅ Yes	❌ No
