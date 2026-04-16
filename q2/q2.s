@@ -2,7 +2,10 @@
 fmt:
 .string "%d"            # Format string for scanf to read an integer
 fmt2:
-.string "%d\n"          # Format string for printf to print an integer with newline
+.string "%d\n"  
+fmt_nl:
+.string "\n"
+# Format string for printf to print an integer with newline
 
 .globl main
 .section .text
@@ -130,10 +133,11 @@ loop3:
     beq x0, x0, loop3 # Repeat loop
 # //if there is a need of printing the new line then 
 # // add these 
-# // la a0, fmtnl
-# // call printf
+
 
 label5:
+    la a0, fmt_nl
+    call printf
     lw s10, 80(sp)# Restore saved registers
     lw s9, 72(sp)
     lw s8, 64(sp)
