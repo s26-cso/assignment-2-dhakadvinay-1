@@ -2,7 +2,7 @@
 fmt:
 .string "%d"            # Format string for scanf to read an integer
 fmt2:
-.string "%d\n"  
+.string "%d "  
 fmt_nl:
 .string "\n"
 # Format string for printf to print an integer with newline
@@ -26,9 +26,9 @@ main:
 
     addi s3, a0, -1 #s3=number of elements argument-1
     mv s10, a1 #save argument base pointer into s10
-
-    li a0, 10000  # Allocate 10000 bytes
-    call malloc 
+    li t1, 4         # size of an integer
+    mul a0, s3, t1   # a0 = number of elements * 4
+    call malloc
     mv s0, a0           # s0 = base address of input array
 
     addi s2, x0, 0  # s2 = loop index i=0
@@ -50,8 +50,9 @@ input:
 
 label2:
 
-    li a0, 10000 #argumnet passed to a0 of the total size 
-    call malloc # called the function malloc 
+    li t1, 4         # size of an integer
+    mul a0, s3, t1   # a0 = number of elements * 4
+    call malloc
     mv s4, a0    # s4 = base address of stack
 
 
