@@ -12,7 +12,7 @@ int main(){
     int x=1;
     while(x){
         int x=scanf("%5s %d %d",op_name,&num1, &num2);
-        if(x==0){
+        if(x!=3){
             break;
         }
         char libname[32];
