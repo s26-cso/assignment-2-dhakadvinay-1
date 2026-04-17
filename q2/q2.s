@@ -12,17 +12,17 @@ fmt_nl:
 
 main:
     addi sp, sp, -96    # Allocate 96 bytes on the stack for saved registers
-    sw s10, 80(sp)      # Save callee-saved registers
-    sw s9, 72(sp)
-    sw s8, 64(sp)
-    sw s7, 56(sp)
-    sw s6, 48(sp)
-    sw s5, 40(sp)
-    sw s4, 32(sp)
-    sw s3, 24(sp)
-    sw s2, 16(sp)
-    sw ra, 8(sp)        # Save return address
-    sw s1, 0(sp)
+    sd s10, 80(sp)      # Save callee-saved registers
+    sd s9, 72(sp)
+    sd s8, 64(sp)
+    sd s7, 56(sp)
+    sd s6, 48(sp)
+    sd s5, 40(sp)
+    sd s4, 32(sp)
+    sd s3, 24(sp)
+    sd s2, 16(sp)
+    sd ra, 8(sp)        # Save return address
+    sd s1, 0(sp)
 
     addi s3, a0, -1 #s3=number of elements argument-1
     mv s10, a1 #save argument base pointer into s10
@@ -140,17 +140,17 @@ loop3:
 label5:
     la a0, fmt_nl
     call printf
-    lw s10, 80(sp)# Restore saved registers
-    lw s9, 72(sp)
-    lw s8, 64(sp)
-    lw s7, 56(sp)
-    lw s6, 48(sp)
-    lw s5, 40(sp)
-    lw s4, 32(sp)
-    lw s3, 24(sp)
-    lw s2, 16(sp)
-    lw ra, 8(sp)
-    lw s1, 0(sp)
+    ld s10, 80(sp)# Restore saved registers
+    ld s9, 72(sp)
+    ld s8, 64(sp)
+    ld s7, 56(sp)
+    ld s6, 48(sp)
+    ld s5, 40(sp)
+    ld s4, 32(sp)
+    ld s3, 24(sp)
+    ld s2, 16(sp)
+    ld ra, 8(sp)
+    ld s1, 0(sp)
     addi sp, sp, 96 # Deallocate stack space
     li a0, 0   # Return 0
     ret      # Exit program
