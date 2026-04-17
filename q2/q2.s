@@ -1,11 +1,10 @@
 .section .rodata
 fmt:
-.string "%d"            # Format string for scanf to read an integer
-fmt2:
-.string "%d "  
+.string "%d"            # Just the number
+fmt_sp:
+.string " "             # Just the space
 fmt_nl:
-.string "\n"
-# Format string for printf to print an integer with newline
+.string "\n"            # Just the newline
 
 .globl main
 .section .text
@@ -121,22 +120,30 @@ label3:
     li s2, 0  # s2 = index for printing
 
 loop3:
-    bge s2, s3, label5  # If all elements printed, exit
+    bge s2, s3, label5      # If all elements printed, exit
 
-    addi t1, x0, 4  # t1==4
-    mul t2, s2, t1   # calculated the offset 
-    add t2, s8, t2  #found address
-    lw a1, 0(t2)        # Load ans[i] into a1
+    # 1. Calculate offset and load ans[i]
+    addi t1, x0, 4  
+    mul t2, s2, t1   
+    add t2, s8, t2  
+    lw a1, 0(t2)            # Load ans[i] into a1
 
-    la a0, fmt2   # Load format string "%d\n"
-    call printf # Print ans[i]
+    # 2. Print the number (without a space)
+    la a0, fmt              # Load "%d"
+    call printf 
 
-    addi s2, s2, 1  # i++
-    beq x0, x0, loop3 # Repeat loop
-# //if there is a need of printing the new line then 
-# // add these 
+    # 3. Check if this is the last element
+    addi t0, s3, -1         # t0 = n - 1
+    beq s2, t0, skip_space  # If i == n - 1, skip the space
 
+    # 4. Print the space
+    la a0, fmt_sp           # Load " "
+    call printf
 
+skip_space:
+    addi s2, s2, 1          # i++
+    beq x0, x0, loop3       # Repeat loop
+    
 label5:
     la a0, fmt_nl
     call printf
