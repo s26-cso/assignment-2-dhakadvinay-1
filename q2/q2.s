@@ -56,9 +56,10 @@ label2:
     mv s4, a0    # s4 = base address of stack
 
 
-    li a0, 10000 #allocate the memory for anser array 
-    call malloc # calling the malloc 
-    mv s8, a0  # s8 = base address of answer array
+    li t1, 4        # size of an integer
+    mul a0, s3, t1  # calculate exact memory needed
+    call malloc     # allocate memory for answer array
+    mv s8, a0       # s8 = base address of answer array
 
     li s2, 0 #reset the loop counter to 0
     li t3, -1 #set t3 to -1 so ans[i] initialize to -1
